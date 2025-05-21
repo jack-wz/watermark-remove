@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+celery
+Pillow
+numpy
+# torch
+# torchvision
+# Potential LaMa-Cleaner specific dependencies (add as discovered)
