@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+langchain
+psycopg2-binary
+openpipe
+sqlalchemy
+alembic
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+authlib
+pgvector
+sentence-transformers

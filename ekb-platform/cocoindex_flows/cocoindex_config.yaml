@@ -1,0 +1,56 @@
+# Placeholder CocoIndex General Configuration
+
+# Path to Flow Definitions
+# Specifies where CocoIndex should look for flow definition files (e.g., YAML or JSON).
+flow_definitions_path: "./flows_definitions/" # Relative to this config file or an absolute path
+
+# Connectors Configuration
+# This section would define connection details for various data sources and sinks.
+# In a real setup, sensitive details like passwords would be managed via environment variables
+# or a secrets management system, and CocoIndex would reference those.
+connectors:
+  # Example Source Connector Configuration
+  - name: "uploaded_markdown_file_source"
+    type: "file_system_source" # Conceptual type
+    config:
+      base_path: "/mnt/ekb_uploads/markdown/" # Path where uploaded markdown files are stored
+      # Other configs: polling_interval, file_pattern, etc.
+
+  # Example Sink Connector Configuration (PostgreSQL)
+  - name: "postgres_document_store_sink"
+    type: "postgres_sink" # Conceptual type
+    config:
+      # Connection details might be a reference to a centrally managed DB connection string
+      # or broken down into components.
+      database_url_env_var: "DATABASE_URL" # CocoIndex could read this from environment
+      # Alternatively:
+      # host: "localhost"
+      # port: 5432
+      # username_env_var: "DB_USER"
+      # password_env_var: "DB_PASSWORD"
+      # database_name: "ekb_db"
+      default_target_table: "ingested_documents" # Default table if flow doesn't specify
+
+# Worker Configuration (Conceptual)
+# Settings for how CocoIndex executes flows.
+# This might be managed by the service that runs CocoIndex rather than a static config file,
+# especially in a distributed environment.
+worker_config:
+  concurrency: 4 # Number of parallel flow executions or steps
+  log_level: "INFO"
+  # Configuration for distributed task queues (e.g., Celery, RabbitMQ) if used
+  # task_queue_broker_url_env_var: "CELERY_BROKER_URL"
+  # task_queue_backend_url_env_var: "CELERY_RESULT_BACKEND"
+
+# Global Settings
+# Other global parameters for CocoIndex operation.
+global_settings:
+  max_retries_per_step: 3
+  default_error_handling_strategy: "log_and_continue" # or "fail_fast"
+  # Temporary directory for processing, etc.
+  temp_processing_dir: "/tmp/cocoindex_work/"
+
+# Plugin Configuration (if CocoIndex supports plugins for custom processors/connectors)
+# plugin_paths:
+#   - "./custom_plugins/"
+#   - "/opt/cocoindex_plugins/"

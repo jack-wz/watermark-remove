@@ -1,0 +1,50 @@
+# Placeholder CocoIndex Flow Definition for Markdown Parsing
+
+flow_name: "Markdown Parsing Flow"
+description: "A flow to ingest a Markdown file, extract its text content, and store it."
+
+# Input Configuration
+# This defines where the flow gets its initial data.
+# In a real CocoIndex setup, this would use a specific connector configuration.
+input:
+  type: "source_connector"
+  name: "uploaded_markdown_file_source" # Name of the configured source connector
+  # Configuration for this source might include:
+  # - Expected data format (e.g., file path, S3 object key)
+  # - Polling interval or trigger mechanism
+
+# Processing Steps
+# Each step takes input from the previous one (or the main flow input)
+# and performs an operation.
+steps:
+  - name: "read_file_content"
+    processor: "file_reader_processor" # Conceptual name of a CocoIndex processor
+    description: "Reads the content of the Markdown file given its path."
+    # Configuration for this processor might include:
+    # - Encoding (e.g., UTF-8)
+    # - Error handling for missing files
+
+  - name: "extract_text_from_markdown"
+    processor: "markdown_text_extractor_processor" # Conceptual name
+    description: "Extracts plain text from the Markdown content."
+    # Configuration might include:
+    # - Options for handling HTML tags within Markdown
+    # - Metadata extraction (e.g., frontmatter)
+
+  - name: "structure_output_data"
+    processor: "data_transformer_processor" # Conceptual name
+    description: "Structures the extracted text and metadata for storage."
+    # Configuration:
+    # - Mapping input fields (from previous steps) to output schema fields
+    # - Adding timestamps or other flow-generated metadata
+
+# Output Configuration
+# Defines where the processed data is sent.
+output:
+  type: "sink_connector"
+  name: "postgres_document_store_sink" # Name of the configured sink connector
+  # Configuration for this sink would include:
+  # - Target table name (e.g., "ingested_documents")
+  # - Database connection details (likely referenced from a central config)
+  # - Field mappings from the flow's output to table columns
+  # - Batching settings for writes

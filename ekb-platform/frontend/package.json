@@ -1,0 +1,25 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "@radix-ui/themes": "latest",
+    "reactflow": "latest",
+    "@trpc/client": "latest",
+    "@apollo/client": "latest",
+    "axios": "^1.6.0",
+    "react-router-dom": "^6.0.0",
+    "react-markdown": "^9.0.0", 
+    "rehype-raw": "^7.0.0"
+  }
+}
